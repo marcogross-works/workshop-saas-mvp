@@ -60,7 +60,9 @@
       "Bash(export PATH=\"$HOME/node/bin:$HOME/bin:/opt/homebrew/bin:$PATH\" cd \"/Users/marcogross/Documents/Projetos Claude/ux_unicornio_workshop\" npm install)",
       "Bash(export PATH=\"$HOME/node/bin:$HOME/bin:/opt/homebrew/bin:$PATH\" cd \"/Users/marcogross/Documents/Projetos Claude/ux_unicornio_workshop\" vercel --prod --yes)",
       "Bash(export PATH=\"$HOME/node/bin:$HOME/bin:/opt/homebrew/bin:$PATH\" cd \"/Users/marcogross/Documents/Projetos Claude/ux_unicornio_workshop\" git add -A)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(export PATH=$HOME/node/bin:$HOME/bin:/opt/homebrew/bin:$PATH cd '/Users/marcogross/Documents/Projetos Claude/ux_unicornio_workshop' vercel --prod --yes)",
+      "Bash(export PATH=\"$HOME/node/bin:$HOME/bin:/opt/homebrew/bin:$PATH\" cd \"/Users/marcogross/Documents/Projetos Claude/ux_unicornio_workshop\" npx storybook@latest init --yes --skip-install)"
     ]
   }
 }

@@ -17,6 +17,13 @@ enum Plan {
   PRO
 }
 
+enum MudancaStatus {
+  RASCUNHO
+  COTANDO
+  CONFIRMADA
+  CONCLUIDA
+}
+
 // ─── Auth.js / next-auth models ───────────────────────────────────────────────
 
 model User {
@@ -40,7 +47,7 @@ model User {
   // Relations
   accounts  Account[]
   sessions  Session[]
-  todoLists TodoList[]
+  mudancas  Mudanca[]
 
   @@map("users")
 }
@@ -87,29 +94,115 @@ model VerificationToken {
 
 // ─── Application models ───────────────────────────────────────────────────────
 
-model TodoList {
-  id        String   @id @default(cuid())
-  title     String
-  userId    String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+model Item {
+  id              String   @id @default(cuid())
+  nome            String
+  categoria       String   // quarto, cozinha, sala, escritorio, caixas
+  iconeUrl        String?  @map("icone_url")
+  larguraCm       Int      @map("largura_cm")
+  alturaCm        Int      @map("altura_cm")
+  profundidadeCm  Int      @map("profundidade_cm")
+  pesoKg          Float    @map("peso_kg")
+  volumeM3        Float    @map("volume_m3")
+  createdAt       DateTime @default(now()) @map("created_at")
 
-  user  User       @relation(fields: [userId], references: [id], onDelete: Cascade)
-  items TodoItem[]
+  mudancaItens    MudancaItem[]
 
-  @@map("todo_lists")
+  @@map("items")
 }
 
-model TodoItem {
+model Caminhao {
+  id              String   @id @default(cuid())
+  nome            String
+  tipo            String   // fiorino, hr, tres_quartos, bau
+  capacidadeM3    Float    @map("capacidade_m3")
+  capacidadeKg    Float    @map("capacidade_kg")
+  comprimentoCm   Int      @map("comprimento_cm")
+  larguraCm       Int      @map("largura_cm")
+  alturaCm        Int      @map("altura_cm")
+  imagemUrl       String?  @map("imagem_url")
+  createdAt       DateTime @default(now()) @map("created_at")
+
+  mudancas        Mudanca[]
+  cargaLayouts    CargaLayout[]
+
+  @@map("caminhoes")
+}
+
+model Transportadora {
+  id              String   @id @default(cuid())
+  nome            String
+  logoUrl         String?  @map("logo_url")
+  notaMedia       Float    @default(0) @map("nota_media")
+  totalAvaliacoes Int      @default(0) @map("total_avaliacoes")
+  cidade          String
+  tiposCaminhao   String[] @map("tipos_caminhao")
+  createdAt       DateTime @default(now()) @map("created_at")
+
+  cotacoes        Cotacao[]
+
+  @@map("transportadoras")
+}
+
+model Mudanca {
+  id              String   @id @default(cuid())
+  userId          String   @map("user_id")
+  enderecoOrigem  String   @map("endereco_origem")
+  enderecoDestino String   @map("endereco_destino")
+  dataDesejada    DateTime? @map("data_desejada")
+  caminhaoId      String?  @map("caminhao_id")
+  status          MudancaStatus @default(RASCUNHO)
+  createdAt       DateTime @default(now()) @map("created_at")
+  updatedAt       DateTime @updatedAt @map("updated_at")
+
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  caminhao        Caminhao? @relation(fields: [caminhaoId], references: [id])
+  itens           MudancaItem[]
+  cotacoes        Cotacao[]
+  cargaLayout     CargaLayout?
+
+  @@map("mudancas")
+}
+
+model MudancaItem {
   id         String   @id @default(cuid())
-  content    String
-  order      Int      @default(0)
-  completed  Boolean  @default(false)
-  todoListId String
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  mudancaId  String   @map("mudanca_id")
+  itemId     String   @map("item_id")
+  quantidade Int      @default(1)
 
-  todoList TodoList @relation(fields: [todoListId], references: [id], onDelete: Cascade)
+  mudanca    Mudanca  @relation(fields: [mudancaId], references: [id], onDelete: Cascade)
+  item       Item     @relation(fields: [itemId], references: [id])
 
-  @@map("todo_items")
+  @@map("mudanca_itens")
+}
+
+model CargaLayout {
+  id                   String   @id @default(cuid())
+  mudancaId            String   @unique @map("mudanca_id")
+  caminhaoId           String   @map("caminhao_id")
+  itensPosicionados    Json     @map("itens_posicionados") // [{itemId, x, y, rotacao}]
+  ocupacaoPercentual   Float    @map("ocupacao_percentual")
+  createdAt            DateTime @default(now()) @map("created_at")
+  updatedAt            DateTime @updatedAt @map("updated_at")
+
+  mudanca              Mudanca  @relation(fields: [mudancaId], references: [id], onDelete: Cascade)
+  caminhao             Caminhao @relation(fields: [caminhaoId], references: [id])
+
+  @@map("carga_layouts")
+}
+
+model Cotacao {
+  id               String   @id @default(cuid())
+  mudancaId        String   @map("mudanca_id")
+  transportadoraId String   @map("transportadora_id")
+  precoCentavos    Int      @map("preco_centavos")
+  dataDisponivel   DateTime @map("data_disponivel")
+  seguroIncluso    Boolean  @default(false) @map("seguro_incluso")
+  validade         DateTime
+  createdAt        DateTime @default(now()) @map("created_at")
+
+  mudanca          Mudanca        @relation(fields: [mudancaId], references: [id], onDelete: Cascade)
+  transportadora   Transportadora @relation(fields: [transportadoraId], references: [id])
+
+  @@map("cotacoes")
 }

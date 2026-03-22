@@ -35,7 +35,7 @@ export default async function AuthLayout({
   }
 
   return (
-    <div className="flex min-h-screen bg-slate-50 dark:bg-slate-950">
+    <div className="flex min-h-screen bg-[#F8FAFC] dark:bg-slate-950">
       <Sidebar plan={userProfile.plan} />
 
       <div className="flex flex-1 flex-col overflow-hidden">

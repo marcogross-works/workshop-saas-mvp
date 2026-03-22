@@ -3,25 +3,91 @@
 
 export type Plan = "FREE" | "TRIAL" | "PRO"
 
-// ─── Prisma model shapes (matching the DB schema) ─────────────────────────────
+// ─── MudaFacil domain types ─────────────────────────────────────────────────
 
-export interface TodoItem {
+export type MudancaStatus = "RASCUNHO" | "COTANDO" | "CONFIRMADA" | "CONCLUIDA"
+
+export interface Mudanca {
   id: string
-  content: string
-  order: number
-  completed: boolean
-  todoListId: string
-  createdAt: Date
-  updatedAt: Date
+  userId: string
+  enderecoOrigem: string
+  enderecoDestino: string
+  dataDesejada: string | null
+  status: MudancaStatus
+  caminhaoId: string | null
+  createdAt: string
+  updatedAt: string
 }
 
-export interface TodoList {
+export interface MudancaItem {
   id: string
-  title: string
-  userId: string
-  createdAt: Date
-  updatedAt: Date
-  items: TodoItem[]
+  mudancaId: string
+  catalogoItemId: string
+  quantidade: number
+  posX: number | null
+  posY: number | null
+  nome: string
+  icone: string
+  largura: number
+  comprimento: number
+  altura: number
+  peso: number
+  categoria: string
+}
+
+export interface CatalogoItem {
+  id: string
+  nome: string
+  icone: string
+  largura: number
+  comprimento: number
+  altura: number
+  peso: number
+  categoria: string
+}
+
+export interface Caminhao {
+  id: string
+  nome: string
+  largura: number
+  comprimento: number
+  altura: number
+  capacidadeM3: number
+  capacidadeKg: number
+}
+
+export interface CargaLayoutItem {
+  itemId: string
+  posX: number
+  posY: number
+  rotacao: number
+}
+
+export interface CargaLayout {
+  mudancaId: string
+  caminhaoId: string
+  itens: CargaLayoutItem[]
+}
+
+export interface Cotacao {
+  id: string
+  mudancaId: string
+  transportadora: string
+  logoUrl: string | null
+  preco: number
+  dataDisponivel: string
+  avaliacao: number
+  seguro: boolean
+  tipoCaminhao: string
+}
+
+export interface CotacaoFilters {
+  precoMin?: number
+  precoMax?: number
+  avaliacaoMin?: number
+  seguro?: boolean
+  tipoCaminhao?: string
+  ordenarPor?: "preco" | "avaliacao" | "data"
 }
 
 export interface UserProfile {
@@ -36,18 +102,21 @@ export interface UserProfile {
 // Plan limits for the frontend paywall
 export const PLAN_LIMITS = {
   FREE: {
-    boards: 1,
-    items: 5,
-    label: "Grátis",
+    mudancas: 1,
+    itens: 15,
+    cotacoes: 3,
+    label: "Gratis",
   },
   TRIAL: {
-    boards: Infinity,
-    items: Infinity,
+    mudancas: Infinity,
+    itens: Infinity,
+    cotacoes: Infinity,
     label: "Trial",
   },
   PRO: {
-    boards: Infinity,
-    items: Infinity,
+    mudancas: Infinity,
+    itens: Infinity,
+    cotacoes: Infinity,
     label: "Pro",
   },
 } as const

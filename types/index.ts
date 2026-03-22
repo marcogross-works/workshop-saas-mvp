@@ -1,10 +1,19 @@
 // types/index.ts
-// Shared TypeScript types for the application
+// Shared TypeScript types for the application — MudaFácil
 
-import type { User, TodoList, TodoItem } from "@prisma/client";
+import type {
+  User,
+  Mudanca,
+  MudancaItem,
+  Item,
+  Caminhao,
+  CargaLayout,
+  Cotacao,
+  Transportadora,
+} from "@prisma/client";
 
-// Re-export the Plan enum so consumers only need to import from @/types
-export { Plan } from "@prisma/client";
+// Re-export the Plan and MudancaStatus enums so consumers only need to import from @/types
+export { Plan, MudancaStatus } from "@prisma/client";
 
 // ─── User with computed plan fields ───────────────────────────────────────────
 
@@ -21,14 +30,53 @@ export interface UserWithPlan extends User {
   isTrialActive: boolean;
 }
 
-// ─── Todo List with items ──────────────────────────────────────────────────────
+// ─── Mudanca with relations ──────────────────────────────────────────────────
 
-/**
- * A TodoList record with its associated items.
- * Items are sorted by `order` ascending.
- */
-export interface TodoListWithItems extends TodoList {
-  items: TodoItem[];
+export interface MudancaWithRelations extends Mudanca {
+  user: Pick<User, "id" | "name" | "email">;
+  caminhao: Caminhao | null;
+  itens: (MudancaItem & { item: Item })[];
+  cotacoes: (Cotacao & { transportadora: Transportadora })[];
+  cargaLayout: CargaLayout | null;
+}
+
+// ─── Catalog types ───────────────────────────────────────────────────────────
+
+export interface ItemCatalog extends Item {
+  // Item already includes all fields; this type is for clarity
+}
+
+export interface CaminhaoInfo extends Caminhao {
+  // Caminhao already includes all fields; this type is for clarity
+}
+
+// ─── Cotacao with transportadora ─────────────────────────────────────────────
+
+export interface CotacaoWithTransportadora extends Cotacao {
+  transportadora: Transportadora;
+}
+
+// ─── Carga layout data ───────────────────────────────────────────────────────
+
+export interface ItemPosicionado {
+  itemId: string;
+  x: number;
+  y: number;
+  rotacao: number;
+}
+
+export interface CargaLayoutData extends CargaLayout {
+  caminhao: Caminhao;
+  itensPosicionados: ItemPosicionado[];
+}
+
+// ─── Plan limits ──────────────────────────────────────────────────────────────
+
+export interface PlanLimits {
+  mudancas: number;
+  itensPorCanvas: number;
+  cotacoesPorMudanca: number;
+  filtrosAvancados: boolean;
 }
 
 // ─── API response shapes ───────────────────────────────────────────────────────

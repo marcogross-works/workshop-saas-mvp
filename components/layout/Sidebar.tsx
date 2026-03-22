@@ -7,18 +7,19 @@ import {
   LayoutDashboard,
   Settings,
   CreditCard,
-  Kanban,
-  ChevronRight,
+  Truck,
+  Plus,
 } from "lucide-react"
 
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
+import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
-import type { Plan, TodoList } from "@/lib/types"
+import type { Plan } from "@/lib/types"
 
 interface SidebarProps {
   plan: Plan
-  boards?: TodoList[]
+  onNovaMudanca?: () => void
 }
 
 interface NavItem {
@@ -35,17 +36,23 @@ const mainNavItems: NavItem[] = [
     icon: <LayoutDashboard className="h-4 w-4" />,
     exact: true,
   },
+  {
+    label: "Minhas Mudancas",
+    href: "/dashboard",
+    icon: <Truck className="h-4 w-4" />,
+    exact: true,
+  },
 ]
 
 const settingsNavItems: NavItem[] = [
   {
-    label: "Configurações",
+    label: "Configuracoes",
     href: "/settings",
     icon: <Settings className="h-4 w-4" />,
     exact: true,
   },
   {
-    label: "Faturamento",
+    label: "Planos",
     href: "/settings/billing",
     icon: <CreditCard className="h-4 w-4" />,
   },
@@ -65,7 +72,7 @@ function getPlanBadgeVariant(plan: Plan) {
 function getPlanLabel(plan: Plan) {
   switch (plan) {
     case "FREE":
-      return "Grátis"
+      return "Gratis"
     case "TRIAL":
       return "Trial"
     case "PRO":
@@ -90,7 +97,7 @@ function NavLink({
       className={cn(
         "flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors",
         isActive
-          ? "bg-violet-50 text-violet-700 dark:bg-violet-950 dark:text-violet-300"
+          ? "bg-[#2563EB]/10 text-[#2563EB] dark:bg-[#2563EB]/20 dark:text-blue-300"
           : "text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-slate-50"
       )}
     >
@@ -100,53 +107,38 @@ function NavLink({
   )
 }
 
-export function Sidebar({ plan, boards = [] }: SidebarProps) {
+export function Sidebar({ plan, onNovaMudanca }: SidebarProps) {
   const pathname = usePathname()
 
   return (
     <aside className="hidden w-60 shrink-0 flex-col border-r border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-950 lg:flex">
       <div className="flex h-14 items-center border-b border-slate-200 px-4 dark:border-slate-800">
         <Link href="/dashboard" className="flex items-center gap-2.5">
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-violet-600">
-            <span className="text-sm font-bold text-white">W</span>
+          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#2563EB]">
+            <Truck className="h-4 w-4 text-white" />
           </div>
           <span className="font-semibold text-slate-900 dark:text-slate-50">
-            Workshop SaaS
+            MudaFacil
           </span>
         </Link>
       </div>
 
       <div className="flex flex-1 flex-col gap-1 overflow-y-auto p-3">
         <div className="mb-1">
-          {mainNavItems.map((item) => (
-            <NavLink key={item.href} item={item} pathname={pathname} />
+          {mainNavItems.map((item, index) => (
+            <NavLink key={`${item.href}-${index}`} item={item} pathname={pathname} />
           ))}
         </div>
 
-        {boards.length > 0 && (
-          <div className="mb-1">
-            <div className="mb-1 px-3 py-1">
-              <p className="text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500">
-                Boards
-              </p>
-            </div>
-            {boards.map((board) => (
-              <Link
-                key={board.id}
-                href={`/dashboard`}
-                className={cn(
-                  "flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition-colors",
-                  pathname === `/dashboard`
-                    ? "text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800"
-                    : "text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-slate-50"
-                )}
-              >
-                <Kanban className="h-4 w-4 shrink-0" />
-                <span className="truncate">{board.title}</span>
-                <ChevronRight className="ml-auto h-3 w-3 shrink-0 opacity-40" />
-              </Link>
-            ))}
-          </div>
+        {/* Nova Mudanca button */}
+        {onNovaMudanca && (
+          <Button
+            onClick={onNovaMudanca}
+            className="mx-1 mb-2 bg-[#2563EB] hover:bg-[#1d4ed8] text-white text-sm h-9"
+          >
+            <Plus className="mr-1.5 h-3.5 w-3.5" />
+            Nova Mudanca
+          </Button>
         )}
       </div>
 

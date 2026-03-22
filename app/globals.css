@@ -1,14 +1,19 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
+  --background: #F8FAFC;
   --foreground: #0f172a;
   --ring: 221.2 83.2% 53.3%;
+  --color-primary: #2563EB;
+  --color-background: #F8FAFC;
+  --color-accent: #F59E0B;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-primary: #2563EB;
+  --color-accent: #F59E0B;
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 }
 
@@ -54,4 +59,12 @@ body {
 
 .dark ::-webkit-scrollbar-thumb:hover {
   background: #475569;
+}
+
+/* Grid pattern for cargo canvas */
+.cargo-grid {
+  background-image:
+    linear-gradient(rgba(37, 99, 235, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(37, 99, 235, 0.08) 1px, transparent 1px);
+  background-size: 20px 20px;
 }

@@ -3,7 +3,7 @@
 import * as React from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
-import { Mail, Loader2, ArrowLeft, CheckCircle2 } from "lucide-react"
+import { Mail, Loader2, ArrowLeft, CheckCircle2, Truck } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -28,7 +28,7 @@ export default function LoginPage() {
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     if (!emailRegex.test(email)) {
-      setError("Por favor, informe um email válido.")
+      setError("Por favor, informe um email valido.")
       return
     }
 
@@ -61,7 +61,7 @@ export default function LoginPage() {
 
   if (isSuccess) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-slate-50 px-4 dark:bg-slate-950">
+      <div className="flex min-h-screen items-center justify-center bg-[#F8FAFC] px-4 dark:bg-slate-950">
         <div className="mx-auto w-full max-w-md text-center">
           <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-green-100 dark:bg-green-900/30">
             <CheckCircle2 className="h-8 w-8 text-green-600 dark:text-green-400" />
@@ -82,15 +82,15 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-slate-50 px-4 dark:bg-slate-950">
+    <div className="flex min-h-screen items-center justify-center bg-[#F8FAFC] px-4 dark:bg-slate-950">
       <div className="mx-auto w-full max-w-md">
         <div className="mb-8 text-center">
           <Link href="/" className="inline-flex items-center gap-2 mb-6">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-violet-600">
-              <span className="text-sm font-bold text-white">W</span>
+            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#2563EB]">
+              <Truck className="h-5 w-5 text-white" />
             </div>
             <span className="text-xl font-bold text-slate-900 dark:text-slate-50">
-              Workshop SaaS
+              MudaFacil
             </span>
           </Link>
 
@@ -98,7 +98,7 @@ export default function LoginPage() {
             Entrar na sua conta
           </h1>
           <p className="text-slate-500 dark:text-slate-400">
-            Informe seu email e enviaremos um link mágico para você entrar sem
+            Informe seu email e enviaremos um link magico para voce entrar sem
             senha.
           </p>
         </div>
@@ -134,7 +134,7 @@ export default function LoginPage() {
 
             <Button
               type="submit"
-              className="w-full bg-violet-600 hover:bg-violet-700 text-white h-11"
+              className="w-full bg-[#2563EB] hover:bg-[#1d4ed8] text-white h-11"
               disabled={isLoading}
             >
               {isLoading ? (
@@ -145,7 +145,7 @@ export default function LoginPage() {
               ) : (
                 <>
                   <Mail className="mr-2 h-4 w-4" />
-                  Enviar link mágico
+                  Enviar link magico
                 </>
               )}
             </Button>
@@ -153,13 +153,13 @@ export default function LoginPage() {
 
           <div className="mt-6 text-center">
             <p className="text-xs text-slate-400 dark:text-slate-500">
-              Ao continuar, você concorda com nossos{" "}
+              Ao continuar, voce concorda com nossos{" "}
               <span className="underline cursor-pointer hover:text-slate-600">
-                Termos de Serviço
+                Termos de Servico
               </span>{" "}
               e{" "}
               <span className="underline cursor-pointer hover:text-slate-600">
-                Política de Privacidade
+                Politica de Privacidade
               </span>
               .
             </p>
@@ -172,7 +172,7 @@ export default function LoginPage() {
             className="inline-flex items-center gap-1.5 text-sm text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors"
           >
             <ArrowLeft className="h-4 w-4" />
-            Voltar para o início
+            Voltar para o inicio
           </Link>
         </div>
       </div>

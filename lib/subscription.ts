@@ -8,20 +8,26 @@ import { db } from "@/lib/db";
 
 export const PLAN_LIMITS = {
   [Plan.FREE]: {
-    todoLists: 1,
-    todoItemsPerList: 5,
+    mudancas: 1,
+    itensPorCanvas: 15,
+    cotacoesPorMudanca: 3,
+    filtrosAvancados: false,
   },
   [Plan.TRIAL]: {
-    todoLists: 999,
-    todoItemsPerList: 999,
+    mudancas: 999,
+    itensPorCanvas: 999,
+    cotacoesPorMudanca: 999,
+    filtrosAvancados: true,
   },
   [Plan.PRO]: {
-    todoLists: 999,
-    todoItemsPerList: 999,
+    mudancas: 999,
+    itensPorCanvas: 999,
+    cotacoesPorMudanca: 999,
+    filtrosAvancados: true,
   },
 } as const;
 
-export type Feature = "todoLists" | "todoItemsPerList";
+export type Feature = "mudancas" | "itensPorCanvas" | "cotacoesPorMudanca";
 
 // ─── User shape expected by helper functions ──────────────────────────────────
 
@@ -85,7 +91,7 @@ export async function getUserPlan(userId: string): Promise<Plan> {
 }
 
 /**
- * Checks whether the user has access to a given feature.
+ * Checks whether the user has access to a given numeric feature.
  * Pass `currentCount` to check against the feature limit.
  *
  * Returns an object `{ allowed: boolean, limit: number, plan: Plan }`.
@@ -102,4 +108,15 @@ export async function canAccess(
     limit,
     plan,
   };
+}
+
+/**
+ * Checks whether the user has access to advanced filters.
+ */
+export async function canUseAdvancedFilters(
+  userId: string
+): Promise<{ allowed: boolean; plan: Plan }> {
+  const plan = await getUserPlan(userId);
+  const allowed = PLAN_LIMITS[plan].filtrosAvancados;
+  return { allowed, plan };
 }

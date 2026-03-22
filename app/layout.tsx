@@ -12,15 +12,15 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: "Workshop SaaS",
-    template: "%s | Workshop SaaS",
+    default: "MudaFacil",
+    template: "%s | MudaFacil",
   },
   description:
-    "Gerencie suas tarefas com um Kanban board intuitivo. Construa seu SaaS em minutos.",
-  keywords: ["kanban", "tarefas", "produtividade", "saas"],
+    "Arraste seus moveis, escolha o caminhao e mude sem estresse. Monte visualmente a carga da sua mudanca com drag & drop.",
+  keywords: ["mudanca", "frete", "caminhao", "carga", "cotacao", "transportadora"],
   openGraph: {
-    title: "Workshop SaaS",
-    description: "Gerencie suas tarefas com um Kanban board intuitivo.",
+    title: "MudaFacil",
+    description: "Monte visualmente a carga da sua mudanca com drag & drop e receba cotacoes instantaneas.",
     type: "website",
     locale: "pt_BR",
   },
@@ -33,7 +33,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-BR" className={inter.variable}>
-      <body className="min-h-screen bg-white font-sans antialiased dark:bg-slate-950">
+      <body className="min-h-screen bg-[#F8FAFC] font-sans antialiased dark:bg-slate-950">
         <QueryProvider>
           {children}
           <Toaster />

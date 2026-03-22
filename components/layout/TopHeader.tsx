@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import Link from "next/link"
-import { LogOut, Settings, CreditCard, User } from "lucide-react"
+import { LogOut, Settings, CreditCard, User, Truck } from "lucide-react"
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
@@ -37,7 +37,7 @@ function getPlanBadgeVariant(plan: Plan) {
 function getPlanLabel(plan: Plan) {
   switch (plan) {
     case "FREE":
-      return "Grátis"
+      return "Gratis"
     case "TRIAL":
       return "Trial"
     case "PRO":
@@ -65,11 +65,11 @@ export function TopHeader({ user, onSignOut }: TopHeaderProps) {
       <div className="flex flex-1 items-center justify-between">
         <div className="flex items-center gap-2 lg:hidden">
           <Link href="/dashboard" className="flex items-center gap-2">
-            <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-violet-600">
-              <span className="text-xs font-bold text-white">W</span>
+            <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-[#2563EB]">
+              <Truck className="h-4 w-4 text-white" />
             </div>
             <span className="font-semibold text-slate-900 dark:text-slate-50">
-              Workshop SaaS
+              MudaFacil
             </span>
           </Link>
         </div>
@@ -87,7 +87,7 @@ export function TopHeader({ user, onSignOut }: TopHeaderProps) {
                   {user.image && (
                     <AvatarImage src={user.image} alt={user.name ?? user.email} />
                   )}
-                  <AvatarFallback className="bg-violet-100 text-violet-700 dark:bg-violet-900 dark:text-violet-300 text-sm font-semibold">
+                  <AvatarFallback className="bg-[#2563EB]/10 text-[#2563EB] dark:bg-[#2563EB]/20 dark:text-blue-300 text-sm font-semibold">
                     {initials}
                   </AvatarFallback>
                 </Avatar>
@@ -98,7 +98,7 @@ export function TopHeader({ user, onSignOut }: TopHeaderProps) {
                 <div className="flex flex-col space-y-2">
                   <div className="flex items-center justify-between">
                     <p className="text-sm font-semibold leading-none truncate max-w-[140px]">
-                      {user.name ?? "Usuário"}
+                      {user.name ?? "Usuario"}
                     </p>
                     <Badge variant={getPlanBadgeVariant(user.plan)}>
                       {getPlanLabel(user.plan)}
@@ -125,7 +125,7 @@ export function TopHeader({ user, onSignOut }: TopHeaderProps) {
               <DropdownMenuItem asChild>
                 <Link href="/settings" className="cursor-pointer">
                   <Settings className="mr-2 h-4 w-4" />
-                  Configurações
+                  Configuracoes
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuSeparator />

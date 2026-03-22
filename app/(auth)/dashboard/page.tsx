@@ -4,7 +4,7 @@ import type { Metadata } from "next"
 import type { Plan } from "@/lib/types"
 
 import { TrialBanner } from "@/components/layout/TrialBanner"
-import { DashboardContent } from "@/components/dashboard/DashboardContent"
+import { DashboardClient } from "./DashboardClient"
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -38,15 +38,15 @@ export default async function DashboardPage() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-50">
-            {user.name ? `Olá, ${user.name.split(" ")[0]}! 👋` : "Bem-vindo de volta! 👋"}
+            {user.name ? `Ola, ${user.name.split(" ")[0]}!` : "Bem-vindo de volta!"}
           </h1>
           <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
-            Gerencie suas tarefas no Kanban board abaixo.
+            Gerencie suas mudancas e planeje sua proxima carga.
           </p>
         </div>
       </div>
 
-      <DashboardContent plan={plan} />
+      <DashboardClient plan={plan} />
     </div>
   )
 }

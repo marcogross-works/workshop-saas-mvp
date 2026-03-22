@@ -2,15 +2,12 @@ import { auth } from "@/lib/auth"
 import { redirect } from "next/navigation"
 import type { Metadata } from "next"
 import { differenceInDays } from "date-fns"
-import { ptBR } from "date-fns/locale"
 import { format } from "date-fns"
 import {
   CreditCard,
   Zap,
   Check,
-  ArrowRight,
   Crown,
-  ExternalLink,
 } from "lucide-react"
 
 import {
@@ -32,7 +29,7 @@ export const metadata: Metadata = {
 
 function getPlanLabel(plan: Plan) {
   switch (plan) {
-    case "FREE": return "Grátis"
+    case "FREE": return "Gratis"
     case "TRIAL": return "Trial"
     case "PRO": return "Pro"
   }
@@ -76,7 +73,7 @@ export default async function BillingPage() {
           Faturamento
         </h1>
         <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
-          Gerencie seu plano e informações de pagamento.
+          Gerencie seu plano e informacoes de pagamento.
         </p>
       </div>
 
@@ -86,7 +83,7 @@ export default async function BillingPage() {
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-base">
-            <CreditCard className="h-4 w-4 text-violet-500" />
+            <CreditCard className="h-4 w-4 text-[#2563EB]" />
             Plano atual
           </CardTitle>
           <CardDescription>
@@ -109,12 +106,12 @@ export default async function BillingPage() {
                 {plan === "TRIAL" &&
                   trialEndsAt &&
                   `Trial expira em ${format(trialEndsAt, "dd/MM/yyyy")}`}
-                {plan === "PRO" && "R$19/mês · Acesso completo"}
+                {plan === "PRO" && "R$29,90/mes · Acesso completo"}
               </p>
             </div>
 
             {isPro && (
-              <Crown className="h-6 w-6 text-violet-500 shrink-0" />
+              <Crown className="h-6 w-6 text-[#2563EB] shrink-0" />
             )}
           </div>
 
@@ -127,9 +124,9 @@ export default async function BillingPage() {
                   </p>
                   <p className="text-xs text-amber-600 dark:text-amber-400 mt-0.5">
                     {daysRemaining === 0
-                      ? "Expira hoje! Faça upgrade para não perder acesso."
+                      ? "Expira hoje! Faca upgrade para nao perder acesso."
                       : daysRemaining === 1
-                      ? "Último dia! Faça upgrade para continuar."
+                      ? "Ultimo dia! Faca upgrade para continuar."
                       : `${daysRemaining} dias restantes`}
                   </p>
                 </div>
@@ -144,18 +141,18 @@ export default async function BillingPage() {
 
       {/* Upgrade or Manage */}
       {!isPro ? (
-        <Card className="border-violet-200 dark:border-violet-800">
+        <Card className="border-[#2563EB]/30 dark:border-blue-800">
           <CardHeader className="pb-4">
             <div className="flex items-center gap-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-violet-100 dark:bg-violet-900/40">
-                <Zap className="h-4 w-4 text-violet-600 dark:text-violet-400" />
+              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#2563EB]/10 dark:bg-blue-900/40">
+                <Zap className="h-4 w-4 text-[#2563EB] dark:text-blue-400" />
               </div>
               <div>
                 <CardTitle className="text-base">
-                  Faça upgrade para PRO
+                  Faca upgrade para PRO
                 </CardTitle>
                 <CardDescription>
-                  Desbloqueie todos os recursos por apenas R$19/mês
+                  Desbloqueie todos os recursos por apenas R$29,90/mes
                 </CardDescription>
               </div>
             </div>
@@ -163,28 +160,28 @@ export default async function BillingPage() {
           <CardContent>
             <ul className="space-y-2 mb-4">
               {[
-                "Boards ilimitados",
-                "Tarefas ilimitadas",
-                "Suporte prioritário",
-                "Acesso antecipado a novidades",
-                "Sem limitações de uso",
+                "Mudancas ilimitadas",
+                "Itens ilimitados",
+                "Cotacoes ilimitadas",
+                "Filtros avancados de cotacao",
+                "Suporte prioritario",
               ].map((feature) => (
                 <li
                   key={feature}
                   className="flex items-center gap-2.5 text-sm text-slate-600 dark:text-slate-400"
                 >
-                  <Check className="h-4 w-4 shrink-0 text-violet-500" />
+                  <Check className="h-4 w-4 shrink-0 text-[#2563EB]" />
                   {feature}
                 </li>
               ))}
             </ul>
 
-            <div className="flex items-baseline gap-1.5 rounded-xl bg-violet-50 p-4 dark:bg-violet-950/30">
-              <span className="text-3xl font-extrabold text-violet-700 dark:text-violet-300">
-                R$19
+            <div className="flex items-baseline gap-1.5 rounded-xl bg-blue-50 p-4 dark:bg-blue-950/30">
+              <span className="text-3xl font-extrabold text-[#2563EB] dark:text-blue-300">
+                R$29,90
               </span>
-              <span className="text-sm text-violet-500">/mês</span>
-              <span className="ml-auto text-xs text-violet-500">
+              <span className="text-sm text-[#2563EB]/70">/mes</span>
+              <span className="ml-auto text-xs text-[#2563EB]/70">
                 Cancele quando quiser
               </span>
             </div>
@@ -197,20 +194,21 @@ export default async function BillingPage() {
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-base">
-              <Crown className="h-4 w-4 text-violet-500" />
+              <Crown className="h-4 w-4 text-[#2563EB]" />
               Assinatura PRO ativa
             </CardTitle>
             <CardDescription>
-              Você tem acesso completo a todos os recursos
+              Voce tem acesso completo a todos os recursos
             </CardDescription>
           </CardHeader>
           <CardContent>
             <div className="space-y-3">
               {[
-                "Boards ilimitados",
-                "Tarefas ilimitadas",
-                "Suporte prioritário",
-                "Acesso antecipado a novidades",
+                "Mudancas ilimitadas",
+                "Itens ilimitados",
+                "Cotacoes ilimitadas",
+                "Filtros avancados de cotacao",
+                "Suporte prioritario",
               ].map((feature) => (
                 <div
                   key={feature}
@@ -230,7 +228,7 @@ export default async function BillingPage() {
 
       <p className="text-xs text-slate-400 text-center">
         Pagamentos processados de forma segura via Stripe. Seus dados de
-        pagamento nunca são armazenados em nossos servidores.
+        pagamento nunca sao armazenados em nossos servidores.
       </p>
     </div>
   )

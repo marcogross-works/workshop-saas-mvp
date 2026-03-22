@@ -34,7 +34,7 @@ export function TrialBanner({ trialEndsAt, className }: TrialBannerProps) {
         "relative w-full rounded-lg border px-4 py-3",
         isExpiringSoon
           ? "border-red-200 bg-red-50 dark:border-red-900 dark:bg-red-950/30"
-          : "border-amber-200 bg-amber-50 dark:border-amber-800 dark:bg-amber-950/30",
+          : "border-[#F59E0B]/30 bg-amber-50 dark:border-amber-800 dark:bg-amber-950/30",
         className
       )}
     >
@@ -56,7 +56,7 @@ export function TrialBanner({ trialEndsAt, className }: TrialBannerProps) {
           <Zap
             className={cn(
               "h-4 w-4",
-              isExpiringSoon ? "text-red-600 dark:text-red-400" : "text-amber-600 dark:text-amber-400"
+              isExpiringSoon ? "text-red-600 dark:text-red-400" : "text-[#F59E0B] dark:text-amber-400"
             )}
           />
         </div>
@@ -75,8 +75,8 @@ export function TrialBanner({ trialEndsAt, className }: TrialBannerProps) {
                 {daysRemaining === 0
                   ? "Seu trial expira hoje!"
                   : daysRemaining === 1
-                  ? "Último dia do seu trial"
-                  : `${daysRemaining} dias restantes no seu trial`}
+                  ? "Ultimo dia do seu trial"
+                  : `Aproveite seu trial — mudancas ilimitadas por mais ${daysRemaining} dias`}
               </p>
               <p
                 className={cn(
@@ -97,7 +97,7 @@ export function TrialBanner({ trialEndsAt, className }: TrialBannerProps) {
                   "shrink-0 text-xs h-8",
                   isExpiringSoon
                     ? "bg-red-600 hover:bg-red-700 text-white"
-                    : "bg-amber-600 hover:bg-amber-700 text-white"
+                    : "bg-[#F59E0B] hover:bg-amber-600 text-white"
                 )}
               >
                 <Zap className="mr-1 h-3 w-3" />
@@ -113,7 +113,7 @@ export function TrialBanner({ trialEndsAt, className }: TrialBannerProps) {
                 "h-1.5",
                 isExpiringSoon
                   ? "[&>div]:bg-red-500"
-                  : "[&>div]:bg-amber-500"
+                  : "[&>div]:bg-[#F59E0B]"
               )}
             />
           </div>

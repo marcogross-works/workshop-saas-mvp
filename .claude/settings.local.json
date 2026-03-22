@@ -43,7 +43,21 @@
       "Bash(osascript:*)",
       "Bash(export PATH=\"$HOME/node/bin:$HOME/bin:/opt/homebrew/bin:$PATH\")",
       "Bash(npx create-next-app@latest . --typescript --tailwind --app --no-src-dir --import-alias \"@/*\" --yes)",
-      "Bash(mv .env.local /tmp/.env.local.bak)"
+      "Bash(mv .env.local /tmp/.env.local.bak)",
+      "Bash(export PATH=\"$HOME/node/bin:$HOME/bin:/opt/homebrew/bin:$PATH\" cd \"/Users/marcogross/Documents/Projetos Claude/ux_unicornio_workshop\" npm install prisma@6 @prisma/client@6 next-auth@beta @auth/prisma-adapter --ignore-scripts)",
+      "Bash(export PATH=\"$HOME/node/bin:$HOME/bin:/opt/homebrew/bin:$PATH\" cd \"/Users/marcogross/Documents/Projetos Claude/ux_unicornio_workshop\" npm install stripe @stripe/stripe-js resend zod @tanstack/react-query @tanstack/react-query-devtools)",
+      "Bash(export PATH=\"$HOME/node/bin:$HOME/bin:/opt/homebrew/bin:$PATH\" cd \"/Users/marcogross/Documents/Projetos Claude/ux_unicornio_workshop\" npm install @dnd-kit/core @dnd-kit/sortable @dnd-kit/utilities lucide-react class-variance-authority clsx tailwind-merge date-fns)",
+      "Bash(export PATH=\"$HOME/node/bin:$HOME/bin:/opt/homebrew/bin:$PATH\" cd \"/Users/marcogross/Documents/Projetos Claude/ux_unicornio_workshop\" npx shadcn@latest init --yes --base-color slate)",
+      "Bash(export PATH=\"$HOME/node/bin:$HOME/bin:/opt/homebrew/bin:$PATH\" cd \"/Users/marcogross/Documents/Projetos Claude/ux_unicornio_workshop\" npx shadcn@latest init --yes)",
+      "Bash(export PATH=\"$HOME/node/bin:$HOME/bin:/opt/homebrew/bin:$PATH\" cd \"/Users/marcogross/Documents/Projetos Claude/ux_unicornio_workshop\" npm install @radix-ui/react-dialog @radix-ui/react-dropdown-menu @radix-ui/react-label @radix-ui/react-slot @radix-ui/react-toast @radix-ui/react-avatar @radix-ui/react-separator @radix-ui/react-progress @radix-ui/react-tabs)",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(d.get\\(''''version'''',''''?''''\\)\\)\")",
+      "Bash(mkdir -p \"/Users/marcogross/Documents/Projetos Claude/ux_unicornio_workshop/app/api/todo-lists/[id]\")",
+      "Bash(mkdir -p \"/Users/marcogross/Documents/Projetos Claude/ux_unicornio_workshop/app/api/todo-items/[id]\")",
+      "Bash(find '/Users/marcogross/Documents/Projetos Claude/ux_unicornio_workshop' -name auth*.ts -o -name auth*.tsx)",
+      "Bash(export PATH=\"$HOME/node/bin:$HOME/bin:/opt/homebrew/bin:$PATH\" cd \"/Users/marcogross/Documents/Projetos Claude/ux_unicornio_workshop\" npx prisma generate)",
+      "Bash(npx prisma:*)",
+      "Bash(export PATH=\"$HOME/node/bin:$HOME/bin:/opt/homebrew/bin:$PATH\" cd \"/Users/marcogross/Documents/Projetos Claude/ux_unicornio_workshop\" npm run build)",
+      "Bash(export PATH=\"$HOME/node/bin:$HOME/bin:/opt/homebrew/bin:$PATH\" cd \"/Users/marcogross/Documents/Projetos Claude/ux_unicornio_workshop\" npm install)"
     ]
   }
 }

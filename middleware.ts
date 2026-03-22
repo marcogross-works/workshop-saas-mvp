@@ -1,52 +1,39 @@
 import { NextResponse } from "next/server"
 import type { NextRequest } from "next/server"
-import { auth } from "@/lib/auth"
+// NOTE: No Prisma / full auth import here — keeps Edge bundle well under 1 MB
 
-// Paths that require authentication
-const protectedPathPrefixes = ["/dashboard", "/settings"]
-
-// Public paths that should redirect to /dashboard when already authenticated
+const protectedPrefixes = ["/dashboard", "/settings"]
 const authOnlyPaths = ["/login"]
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
 
-  // Skip API routes (auth handles these internally)
-  if (pathname.startsWith("/api/")) {
+  if (pathname.startsWith("/api/") || pathname.startsWith("/_next/")) {
     return NextResponse.next()
   }
 
-  const isProtected = protectedPathPrefixes.some((prefix) =>
-    pathname.startsWith(prefix)
-  )
-
+  const isProtected = protectedPrefixes.some((p) => pathname.startsWith(p))
   const isAuthOnly = authOnlyPaths.some(
-    (path) => pathname === path || pathname.startsWith(`${path}/`)
+    (p) => pathname === p || pathname.startsWith(`${p}/`)
   )
 
-  if (!isProtected && !isAuthOnly) {
-    return NextResponse.next()
+  if (!isProtected && !isAuthOnly) return NextResponse.next()
+
+  // Check session cookie directly — lightweight, no Prisma
+  const sessionCookie =
+    request.cookies.get("authjs.session-token") ??
+    request.cookies.get("__Secure-authjs.session-token")
+
+  const isAuthenticated = !!sessionCookie?.value
+
+  if (isProtected && !isAuthenticated) {
+    const url = new URL("/login", request.url)
+    url.searchParams.set("callbackUrl", pathname)
+    return NextResponse.redirect(url)
   }
 
-  try {
-    const session = await auth()
-    const isAuthenticated = !!session?.user
-
-    if (isProtected && !isAuthenticated) {
-      const loginUrl = new URL("/login", request.url)
-      loginUrl.searchParams.set("callbackUrl", pathname)
-      return NextResponse.redirect(loginUrl)
-    }
-
-    if (isAuthOnly && isAuthenticated) {
-      return NextResponse.redirect(new URL("/dashboard", request.url))
-    }
-  } catch {
-    // If auth fails, allow protected routes to handle it at page level
-    if (isProtected) {
-      const loginUrl = new URL("/login", request.url)
-      return NextResponse.redirect(loginUrl)
-    }
+  if (isAuthOnly && isAuthenticated) {
+    return NextResponse.redirect(new URL("/dashboard", request.url))
   }
 
   return NextResponse.next()

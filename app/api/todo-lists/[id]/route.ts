@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 // app/api/todo-lists/[id]/route.ts
 // GET    — fetch a single todo list with its items
 // PATCH  — update the title

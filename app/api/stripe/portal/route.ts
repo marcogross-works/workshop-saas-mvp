@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 // app/api/stripe/portal/route.ts
 // Creates a Stripe Billing Portal session for managing subscriptions
 

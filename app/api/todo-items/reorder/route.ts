@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 // app/api/todo-items/reorder/route.ts
 // POST — bulk-update the order of todo items in a single transaction
 

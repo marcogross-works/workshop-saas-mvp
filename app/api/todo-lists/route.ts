@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 // app/api/todo-lists/route.ts
 // GET  — list all todo lists for the authenticated user
 // POST — create a new todo list (paywall enforced)

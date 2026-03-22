@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 // app/api/todo-items/[id]/route.ts
 // PATCH  — update content, completed flag, or order
 // DELETE — delete the todo item

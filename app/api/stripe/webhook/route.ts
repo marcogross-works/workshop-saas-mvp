@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 // app/api/stripe/webhook/route.ts
 // Stripe webhook handler — processes subscription lifecycle events
 

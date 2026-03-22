@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 // app/api/stripe/checkout/route.ts
 // Creates a Stripe Checkout Session for the PRO subscription
 

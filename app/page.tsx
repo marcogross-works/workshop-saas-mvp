@@ -171,13 +171,12 @@ export default function LandingPage() {
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
               </Link>
-              <Link href="#features">
+              <Link href="/simulador">
                 <Button
                   size="lg"
-                  variant="outline"
-                  className="h-12 border-slate-300 px-8 text-base text-slate-600 hover:bg-slate-100"
+                  className="h-12 bg-[#F59E0B] px-8 text-base hover:bg-[#d97706] text-white font-semibold"
                 >
-                  Ver como funciona
+                  Simular mudanca gratis
                 </Button>
               </Link>
             </div>
@@ -272,6 +271,29 @@ export default function LandingPage() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Experimente agora Section */}
+      <section className="py-16 sm:py-20 bg-gradient-to-r from-[#2563EB] to-blue-700">
+        <div className="mx-auto max-w-3xl px-4 text-center">
+          <span className="text-4xl mb-4 block">🚛</span>
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">
+            Experimente agora
+          </h2>
+          <p className="text-blue-100 text-base sm:text-lg mb-8 max-w-xl mx-auto">
+            Teste o simulador gratuitamente — sem cadastro, sem compromisso.
+            Arraste seus moveis e descubra o caminhao ideal.
+          </p>
+          <Link href="/simulador">
+            <Button
+              size="lg"
+              className="h-12 px-10 text-base font-semibold bg-[#F59E0B] hover:bg-[#d97706] text-white"
+            >
+              Abrir simulador gratis
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Button>
+          </Link>
         </div>
       </section>
 
